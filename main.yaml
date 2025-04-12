@@ -1,0 +1,34 @@
+---
+- name: Deploy LAMP stack
+  hosts: all
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: Update apt package index
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+  roles:
+    - role: apache
+      tags: apache
+    - role: php
+      tags: php
+    - role: mysql
+      tags: mysql
+
+  post_tasks:
+    - name: Configure firewall (UFW)
+      community.general.ufw:
+        - name: Allow HTTP traffic
+          community.general.ufw:
+            rule: allow
+            port: "80"
+            proto: tcp
+        - name: Allow HTTPS traffic
+          community.general.ufw:
+            rule: allow
+            port: "443"
+            proto: tcp
+

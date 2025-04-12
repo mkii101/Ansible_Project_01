@@ -1,0 +1,26 @@
+---
+- name: Install MySQL Server
+  ansible.builtin.apt:
+    name: mysql-server
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure MySQL is running and enabled
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Create a new database with name 'MO'
+  community.mysql.mysql_db:
+    name: MO
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Try to create database as root/nopassword first. If not allowed, pass the credentials
+  community.mysql.mysql_db:
+    check_implicit_admin: true
+    login_user: mohamed
+    login_password: 123456
+    name: MO
+    state: present

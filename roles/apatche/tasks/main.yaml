@@ -1,0 +1,21 @@
+---
+- name: Install Apatche Server- name: Install apache httpd (state=present is optional)
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+
+- name: Ensure Apache is running and enabled
+  ansible.builtin.service:
+    name: apache2
+    state: started
+    enabled: yes
+  notify: restart apache
+
+- name: Deploy sample index.php
+  ansible.builtin.template:
+    src: index.php
+    dest: /var/www/html/index.php
+    owner: www-d
+    group: www-d
+    mode: '0644'
+  notify: restart apache
