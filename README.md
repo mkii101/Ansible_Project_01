@@ -6,7 +6,7 @@ Automate LAMP Stack Deployment (Using Ansible)
 `ansible-galaxy install -r requirements.yml`
 
 ## Directory Structure
-
+```
 Ansible_Project_01/
 ├── roles/
 │   ├── apache/
@@ -30,7 +30,7 @@ Ansible_Project_01/
 │       │   └── main.yml
 │       └── vars/
 │           └── main.yml
-
+```
 ## How to run the playbook
 
 `ansible-playbook -i main.yml
