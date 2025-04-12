@@ -7,7 +7,7 @@ Automate LAMP Stack Deployment (Using Ansible)
 
 ## Directory Structure
 
-`Ansible_Project_01/
+Ansible_Project_01/
 ├── roles/
 │   ├── apache/
 │   │   ├── handlers/
@@ -30,4 +30,9 @@ Automate LAMP Stack Deployment (Using Ansible)
 │       │   └── main.yml
 │       └── vars/
 │           └── main.yml
+
+## How to run the playbook
+
+`ansible-playbook -i main.yml
 `
+
